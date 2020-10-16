@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -13,7 +15,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        dd(\App\Post::all());
+        return view('posts.index', [
+            'posts' => Post::all()->sortByDesc('created_at')
+        ]);
     }
 
     /**
@@ -23,7 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -34,7 +38,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post();
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+        $post->active = true;
+
+        $post->save();
+
+        return redirect()->route('posts.show', ['post' => $post->id]);
     }
 
     /**
@@ -45,7 +56,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        dd(\App\Post::find($id));
+        return view('posts.show', [
+            'post' => Post::find($id)
+        ]);
     }
 
     /**
