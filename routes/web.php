@@ -14,8 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/blog/{id}/{author?}', 'HomeController@blog')->name('blog');
+// Route::get('/blog/{id}/{author?}', 'HomeController@blog')->name('blog');
+
 
 Route::get('/about', 'HomeController@about')->name('about');
 
 Route::get('/home', 'HomeController@home')->name('home');
+
+Route::resource('/posts', 'PostController')->only(['index', 'show']);
