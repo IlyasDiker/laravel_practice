@@ -27,6 +27,14 @@
             </script>
         @endif
 
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+            <script>
+                alertify.error('{{ $error }}');
+            </script>
+            @endforeach
+        @endif
+
         @yield('content')  
     </div>
 </body>
