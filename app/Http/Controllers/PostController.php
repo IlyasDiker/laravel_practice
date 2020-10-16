@@ -45,6 +45,8 @@ class PostController extends Controller
 
         $post->save();
 
+        $request->session()->flash('status', 'Post created successfuly');
+
         return redirect()->route('posts.show', ['post' => $post->id]);
     }
 

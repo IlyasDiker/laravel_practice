@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
     <script src="https://kit.fontawesome.com/097cd24b76.js" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <title>Twitter - {{ ucfirst($title ?? 'Page') }}</title>
 </head>
 <body>
@@ -19,6 +21,12 @@
             {{-- <a class="column button button-clear" href="{{ route('home') }}"></a> --}}
         </div>   
         <br>
+        @if (session()->has('status'))
+            <script>
+                alertify.success('{{ session()->get('status') }}');
+            </script>
+        @endif
+
         @yield('content')  
     </div>
 </body>
