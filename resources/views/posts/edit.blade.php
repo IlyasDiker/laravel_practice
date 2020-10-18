@@ -8,11 +8,11 @@
 
         <div>
             <label for="title">Title</label>
-        <input type="text" name="title" id="title" value="{{ old('title', $post->title) }}" required>
+        <input type="text" name="title" id="title" value="{{ old('title', $post->title ?? null) }}" required>
         </div>
         <div>
             <label for="content">Content</label>
-            <input type="text" name="content" id="content" value="{{ old('content', $post->title) }}" required>
+            <input type="text" name="content" id="content" value="{{ old('content', $post->content ?? null) }}" required>
         </div>
 
         @if ($errors->any())

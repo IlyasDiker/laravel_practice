@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePost;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -36,12 +37,8 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePost $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'bail|required|min:4|max:100',
-            'content' => 'required'
-        ]);
 
         // $post = new Post();
         // $post->title = $request->input('title');
@@ -93,9 +90,19 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StorePost $request, $id)
     {
-        
+        $post = Post::findOrFail($id);
+
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+        $post->slug = Str::slug($request->input('content'), '-');
+
+        $post->save();
+
+        $request->session()->flash('status', 'Post Updated successfuly');
+
+        return redirect()->route('posts.show', ['post' => $post->id]);
     }
 
     /**
@@ -104,8 +111,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+       Post::destroy($id);
+
+       $request->session()->flash('status', 'Post Deleted successfuly');
+
+       return redirect()->route('posts.index');
     }
 }

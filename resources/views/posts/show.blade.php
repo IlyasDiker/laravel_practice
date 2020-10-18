@@ -2,6 +2,10 @@
 
 @section('content')
 
+<script>
+
+</script>
+
 <div>
     <h2>{{ $post->title }}</h2>
     <i>Visibilty : 
@@ -17,8 +21,14 @@
 <em>{{ $post->created_at->diffForHumans() }}</em>
 <br><br>
 <div>
-    <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="button">Edit</a>
-    <a href="{{-- route('posts.destroy', ['post' => $post->id]) --}}" class="button">Delete</a>
+    
+    <form method="POST" action="{{ route('posts.destroy', ['post' => $post->id]) }}">
+        @csrf
+        @method('DELETE')
+        <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="button">Edit</a>
+        <button type="submit" class="button">Delete</button>
+    </form>
+    
 </div>
 
 @endsection
