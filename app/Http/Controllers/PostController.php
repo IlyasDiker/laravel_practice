@@ -43,12 +43,15 @@ class PostController extends Controller
             'content' => 'required'
         ]);
 
-        $post = new Post();
-        $post->title = $request->input('title');
-        $post->content = $request->input('content');
-        $post->active = true;
+        // $post = new Post();
+        // $post->title = $request->input('title');
+        // $post->content = $request->input('content');
+        // $post->active = true;
+        $data = $request->only(['title', 'content']);
+        $data['slug'] = Str::slug($data['title'], '-');
+        $data['active'] = false;
 
-        $post->save();
+        $post = Post::create($data);
 
         $request->session()->flash('status', 'Post created successfuly');
 

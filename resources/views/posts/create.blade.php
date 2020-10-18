@@ -7,11 +7,11 @@
 
         <div>
             <label for="title">Title</label>
-            <input type="text" name="title" id="title" required>
+        <input type="text" name="title" id="title" value="{{ old('title') }}" required>
         </div>
         <div>
             <label for="content">Content</label>
-            <input type="text" name="content" id="content" required>
+            <input type="text" name="content" id="content" value="{{ old('content') }}" required>
         </div>
 
         @if ($errors->any())
