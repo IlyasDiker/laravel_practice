@@ -8,4 +8,8 @@ class Post extends Model
 {
     //
     protected $fillable = ['title', 'content', 'slug', 'active'];
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }
