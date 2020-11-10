@@ -6,6 +6,8 @@ use App\Http\Requests\StorePost;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+
 
 class PostController extends Controller
 {
@@ -16,8 +18,10 @@ class PostController extends Controller
      */
     public function index()
     {
+        $posts = Post::withCount('comments')->get();
+
         return view('posts.index', [
-            'posts' => Post::all()->sortByDesc('created_at')
+            'posts' => $posts
         ]);
     }
 

@@ -11,6 +11,12 @@
             <a href="{{ route('posts.show', ['post' => $post->id])}}"><strong>{{ $post->title }}</strong></a>
             <p>{{ $post->content }}</p>
             <em>{{ $post->created_at->diffForHumans() }}</em>
+            @if ($post->comments_count)
+                <em><br>{{ $post->comments_count }} Comment</em>
+            @else
+                <em><br>No comments yet</em>
+            @endif
+            
         </div>
     </li>
     @empty

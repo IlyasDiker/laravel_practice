@@ -28,7 +28,14 @@
         <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="button">Edit</a>
         <button type="submit" class="button">Delete</button>
     </form>
+    <form method="POST" class ="row" action="{{-- route('comment.store', ['post' => $post->id]) --}}">
+        @csrf
+        <input type="text" placeholder="Write your Comment" required>
+        <button type="submit" class="button">Submit</button>
+    </form>
     
 </div>
+
+{{-- @extends('comments') --}}
 
 @endsection
