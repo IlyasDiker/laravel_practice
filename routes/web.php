@@ -16,10 +16,14 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/blog/{id}/{author?}', 'HomeController@blog')->name('blog');
 
-Route::get('/', 'HomeController@home')->name('home');
+// Route::get('/', 'HomeController@home')->name('home');
 
 Route::get('/about', 'HomeController@about')->name('about');
 
 Route::get('/home', 'HomeController@home')->name('home');
 
 Route::resource('/posts', 'PostController')->only(['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
