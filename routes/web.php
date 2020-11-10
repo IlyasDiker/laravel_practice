@@ -20,7 +20,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/about', 'HomeController@about')->name('about');
 
-Route::get('/home', 'HomeController@home')->name('home');
+// Route::get('/home', 'HomeController@home')->name('home');
+
+Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
 
 Route::resource('/posts', 'PostController')->only(['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']);
 
